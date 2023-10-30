@@ -1,0 +1,17 @@
+[mysqld]
+
+skip-networking = 0
+datadir = /var/lib/mysql
+port = 3306
+user = mysql
+bind-address=0.0.0.0
+skip-name-resolve
+
+[mariadb]
+
+skip-networking = 0
+datadir = /var/lib/mysql
+port = 3306
+user = mysql
+bind-address=0.0.0.0
+skip-name-resolve

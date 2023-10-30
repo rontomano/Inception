@@ -1,0 +1,58 @@
+version: '3' #No valid in docker-compose version 2
+
+services:
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    restart: on-failure
+    env_file: .env
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - inception
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    restart: on-failure
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    restart: on-failure
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/wordpress
+    ports:
+      - 443:443
+    networks:
+      - inception
+    depends_on:
+      - wordpress #check
+
+volumes:
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ../volumes/mariadb
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ../volumes/wordpress
+
+networks:
+  inception:
+    driver: bridge
+
