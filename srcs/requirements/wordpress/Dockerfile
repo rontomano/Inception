@@ -33,7 +33,10 @@ RUN mkdir /run/php
 
 COPY tools/config-wordpress.sh  /config-wordpress.sh
 
+RUN chmod +x /config-wordpress.sh
+
 EXPOSE 9000
 
-ENTRYPOINT sh /config-wordpress.sh
+CMD [ "php-fpm81", "-F" ]
+ENTRYPOINT ["/config-wordpress.sh"]
 

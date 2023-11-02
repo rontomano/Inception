@@ -1,5 +1,3 @@
-version: '3' #No valid in docker-compose version 2
-
 services:
 
   mariadb:
@@ -36,7 +34,7 @@ services:
     networks:
       - inception
     depends_on:
-      - wordpress #check
+      - wordpress
 
 volumes:
   mariadb:

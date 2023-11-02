@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 if [ -f /var/www/wordpress/wp-config.php ]
 then
@@ -30,6 +30,6 @@ wp-cli.phar user create \
 	${WP_USER} \
 	${WP_USER_MAIL} \
 	--user_pass=${WP_USER_PASS}
+echo "Wordpress is configured"
 fi
-
-exec php-fpm81 -F
+exec "$@"
