@@ -10,5 +10,5 @@ RUN chmod +x /start-mariadb.sh
 #Expose port
 EXPOSE 3306
 #start script
-CMD  ["mysqld", "--silent-startup"]
+CMD  ["mysqld_safe", "--silent-startup"]
 ENTRYPOINT ["/start-mariadb.sh"]

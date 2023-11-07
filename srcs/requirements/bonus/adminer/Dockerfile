@@ -30,8 +30,12 @@ RUN apk update && apk add wget \
 RUN mkdir -p /var/www/html && \
 	wget -O /var/www/html/index.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-en.php  && \
 	chown -R root:root /var/www/html
+#copy script
+COPY tools/start_adminer.sh  /start_adminer.sh
+RUN chmod +x /start_adminer.sh
 #expose port
 EXPOSE 8080
 #start adminer
-ENTRYPOINT [ "php", "-S", "0.0.0.0:8080", "-t", "/var/www/html" ]
+CMD [ "php", "-S", "0.0.0.0:8080", "-t", "/var/www/html" ]
+ENTRYPOINT [ "/start_adminer.sh" ]
 

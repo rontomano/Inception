@@ -7,8 +7,10 @@ ARG PHP_VERSION=81
 RUN apk update && apk add curl \
 						php${PHP_VERSION} \
 						php${PHP_VERSION}-fpm \
+						php${PHP_VERSION}-session \
 						php${PHP_VERSION}-mysqli \
 						php${PHP_VERSION}-phar \
+						php${PHP_VERSION}-zlib \
 						php${PHP_VERSION}-json \
 						php${PHP_VERSION}-dom \
 						php${PHP_VERSION}-iconv \
@@ -22,13 +24,17 @@ RUN apk update && apk add curl \
 						php${PHP_VERSION}-cgi \
 						php${PHP_VERSION}-redis \
 						php${PHP_VERSION}-tokenizer \
+						php${PHP_VERSION}-posix \
 						php${PHP_VERSION}-ctype \
+						php${PHP_VERSION}-intl \
+						php${PHP_VERSION}-opcache \
+						php${PHP_VERSION}-pcntl \
 						mariadb-client \
 						zip
 #install symfony
-RUN apk add bash
-RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash
-RUN apk add symfony-cli
+# RUN apk add bash
+# RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash
+# RUN apk add symfony-cli
 #install wordpress
 COPY tools/wordpress.zip /wordpress.zip
 # RUN curl https://es.wordpress.org/wordpress-6.3.2-es_ES.zip -O wordpress.zip
