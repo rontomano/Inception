@@ -1,5 +1,5 @@
 services:
-
+# Mandatory services
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
@@ -36,6 +36,29 @@ services:
     depends_on:
       - wordpress
 
+# Bonus services
+  redis:
+    container_name: redis
+    build: ./requirements/bonus/redis
+    restart: on-failure
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer
+    restart: on-failure
+    env_file: .env
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+
 volumes:
   mariadb:
     driver: local
@@ -53,4 +76,3 @@ volumes:
 networks:
   inception:
     driver: bridge
-
