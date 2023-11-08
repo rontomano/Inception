@@ -8,7 +8,7 @@ term_handler() {
 # Setup signal handler
 trap 'term_handler' SIGTERM
 
-if ! id -u "${FTP_USER}" >/dev/null 2>&1; then
+if id -u "${FTP_USER}" >/dev/null 2>&1; then
   echo "vsftpd already configured"
 else
   adduser -h /var/www/wordpress -s /bin/false -D ${FTP_USER}
