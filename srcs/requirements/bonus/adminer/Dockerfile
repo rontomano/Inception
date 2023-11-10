@@ -5,37 +5,44 @@ ARG PHP_VERSION=81
 #https://dev.to/vikbert/my-checklist-of-php-extensions-used-in-alpine-docker-image-1g3j
 #install wget and php
 RUN apk update && apk add wget \
-				mariadb-client \
-				php${PHP_VERSION} \
-				php${PHP_VERSION}-fpm \
-				php${PHP_VERSION}-common \
-				php${PHP_VERSION}-session \
-				php${PHP_VERSION}-iconv \
-				php${PHP_VERSION}-json \
-				php${PHP_VERSION}-gd \
-				php${PHP_VERSION}-curl \
-				php${PHP_VERSION}-xml \
-				php${PHP_VERSION}-mysqli \
-				php${PHP_VERSION}-imap \
-				php${PHP_VERSION}-pdo \
-				php${PHP_VERSION}-pdo_mysql \
-				php${PHP_VERSION}-soap \
-				php${PHP_VERSION}-posix \
-				php${PHP_VERSION}-gettext \
-				php${PHP_VERSION}-ldap \
-				php${PHP_VERSION}-ctype \
-				php${PHP_VERSION}-dom \
-				php${PHP_VERSION}-simplexml
+						php${PHP_VERSION} \
+						php${PHP_VERSION}-fpm \
+						php${PHP_VERSION}-session \
+						php${PHP_VERSION}-mysqli \
+						php${PHP_VERSION}-phar \
+						php${PHP_VERSION}-zlib \
+						php${PHP_VERSION}-json \
+						php${PHP_VERSION}-dom \
+						php${PHP_VERSION}-iconv \
+						php${PHP_VERSION}-mbstring \
+						php${PHP_VERSION}-openssl \
+						php${PHP_VERSION}-curl \
+						php${PHP_VERSION}-zip \
+						php${PHP_VERSION}-xml \
+						php${PHP_VERSION}-fileinfo \
+						php${PHP_VERSION}-exif \
+						php${PHP_VERSION}-cgi \
+						php${PHP_VERSION}-redis \
+						php${PHP_VERSION}-tokenizer \
+						php${PHP_VERSION}-posix \
+						php${PHP_VERSION}-ctype \
+						php${PHP_VERSION}-intl \
+						php${PHP_VERSION}-opcache \
+						php${PHP_VERSION}-pcntl \
+						mariadb-client \
+						zip
 # download adminer
 RUN mkdir -p /var/www/html && \
 	wget -O /var/www/html/index.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-en.php  && \
 	chown -R root:root /var/www/html
+#copy php config
+COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
 #copy script
 COPY tools/start_adminer.sh  /start_adminer.sh
 RUN chmod +x /start_adminer.sh
 #expose port
-EXPOSE 8080
+EXPOSE 4242
 #start adminer
-CMD [ "php", "-S", "0.0.0.0:8080", "-t", "/var/www/html" ]
-ENTRYPOINT [ "/start_adminer.sh" ]
+CMD [ "php-fpm81", "-F" ]
+# ENTRYPOINT [ "/start_adminer.sh" ]
 

@@ -74,6 +74,30 @@ services:
     depends_on:
       - wordpress
 
+  cadvisor:
+    container_name: cadvisor
+    build: ./requirements/bonus/cadvisor
+    restart: on-failure
+    env_file: .env
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - 8080:8080
+    networks:
+      - inception
+    privileged: true
+
+  website:
+    container_name: website
+    build: ./requirements/bonus/website
+    restart: on-failure
+    env_file: .env
+    networks:
+      - inception
+
 volumes:
   mariadb:
     driver: local
@@ -81,12 +105,14 @@ volumes:
       type: none
       o: bind
       device: ../volumes/mariadb
+      # device: /home/drontome/data/mariadb
   wordpress:
     driver: local
     driver_opts:
       type: none
       o: bind
       device: ../volumes/wordpress
+      # device: /home/drontome/data/wordpress
 
 networks:
   inception:

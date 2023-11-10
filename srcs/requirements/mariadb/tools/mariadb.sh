@@ -1,5 +1,14 @@
 #!/bin/sh
 
+# SIGTERM-handler
+term_handler() {
+  kill -SIGTERM ${pid}
+  exit 0
+}
+
+# Setup signal handler
+trap 'term_handler' SIGTERM
+
 if [ ! -d "/var/lib/mysql/mysql" ]; then
 		#run initial config
 		mkdir -p /var/run/mysqld
@@ -25,5 +34,7 @@ if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
 	EOF
 	mysqld --user=mysql --bootstrap --silent < /tmp/create.sql
 fi
-exec "$@"
-
+"$@" &
+pid="$!"
+#wait for mysql to end
+wait ${pid}

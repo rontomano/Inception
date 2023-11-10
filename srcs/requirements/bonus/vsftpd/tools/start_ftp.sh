@@ -2,6 +2,7 @@
 
 # SIGTERM-handler
 term_handler() {
+  kill -SIGTERM ${pid}
   exit 0
 }
 
@@ -28,4 +29,7 @@ else
 
   echo "vsftpd configured"
 fi
-exec "$@"
+"$@" &
+pid="$!"
+#wait for mysql to end
+wait ${pid}
