@@ -4,11 +4,14 @@ FROM alpine:3.17
 RUN apk update && apk upgrade && \
     apk add nodejs npm
 
-#start website
-# RUN npx create-next-app static-website
+#start project with template
 RUN npx create-next-app --example blog drontome_blog
-# RUN npx create-next-app static-website --use-npm --js --no-eslint --no-tailwind --no-src-dir --app --import-alias "@/*"
 WORKDIR /drontome_blog
+#copy config and pages
+COPY ./config/next.config.js ./next.config.js
+COPY ./tools/pages ./pages
+#build project
 RUN npm run build
+#expose port and start project
 EXPOSE 3000
 CMD ["npm", "start"]
