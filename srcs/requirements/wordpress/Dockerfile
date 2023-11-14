@@ -2,7 +2,7 @@
 FROM alpine:3.17
 #set php version
 ARG PHP_VERSION=81
-#install wget and php and zip
+#install php
 #https://dev.to/vikbert/my-checklist-of-php-extensions-used-in-alpine-docker-image-1g3j
 RUN apk update && apk add curl \
 						php${PHP_VERSION} \
@@ -31,17 +31,13 @@ RUN apk update && apk add curl \
 						php${PHP_VERSION}-pcntl \
 						mariadb-client \
 						zip
-#install symfony
-# RUN apk add bash
-# RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash
-# RUN apk add symfony-cli
+
 #install wordpress
 COPY tools/wordpress.zip /wordpress.zip
 # RUN curl https://es.wordpress.org/wordpress-6.3.2-es_ES.zip -O wordpress.zip
 RUN	unzip wordpress.zip -d /var/www/ \
 	&& rm wordpress.zip \
 	&& chown -R root:root /var/www/wordpress
-#check for nginx:nginx instead of root:root
 
 #copy php config
 COPY conf/www.conf /etc/php81/php-fpm.d/www.conf

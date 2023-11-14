@@ -34,7 +34,11 @@ if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
 	EOF
 	mysqld --user=mysql --bootstrap --silent < /tmp/create.sql
 fi
-"$@" &
-pid="$!"
-#wait for mysql to end
-wait ${pid}
+#start mariadb
+exec "$@"
+
+#start mariadb in background to catch signals
+# "$@" &
+# pid="$!"
+# #wait for mysql to end
+# wait ${pid}

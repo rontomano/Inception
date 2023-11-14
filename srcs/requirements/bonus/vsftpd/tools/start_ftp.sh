@@ -29,7 +29,11 @@ else
 
   echo "vsftpd configured"
 fi
-"$@" &
-pid="$!"
-#wait for mysql to end
-wait ${pid}
+#start vsftpd
+exec "$@"
+
+#start vsftpd in background to catch signals
+# "$@" &
+# pid="$!"
+# #wait for mysql to end
+# wait ${pid}

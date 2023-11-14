@@ -1,4 +1,4 @@
-CONF_FILE := ./scrs/docker-compose.yml
+CONF_FILE := ./srcs/docker-compose.yml
 MARIA_VOLUME :=
 WORDPRESS_VOLUME :=
 
@@ -21,6 +21,6 @@ fclean: clean
 	# rm -rf $(MARIA_VOLUME) $(WORDPRESS_VOLUME)
 
 status:
-	docker compose -f $(CONF_FILE) ps
+	@docker compose -f $(CONF_FILE) ps
 
 .PHONY: all up re down clean

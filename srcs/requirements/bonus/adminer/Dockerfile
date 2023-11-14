@@ -3,7 +3,7 @@ FROM alpine:3.17
 #set php version
 ARG PHP_VERSION=81
 #https://dev.to/vikbert/my-checklist-of-php-extensions-used-in-alpine-docker-image-1g3j
-#install wget and php
+#install php
 RUN apk update && apk add wget \
 						php${PHP_VERSION} \
 						php${PHP_VERSION}-fpm \
@@ -37,12 +37,7 @@ RUN mkdir -p /var/www/html && \
 	chown -R root:root /var/www/html
 #copy php config
 COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
-#copy script
-COPY tools/start_adminer.sh  /start_adminer.sh
-RUN chmod +x /start_adminer.sh
 #expose port
 EXPOSE 4242
 #start adminer
 CMD [ "php-fpm81", "-F" ]
-# ENTRYPOINT [ "/start_adminer.sh" ]
-
