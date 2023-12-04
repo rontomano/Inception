@@ -1,0 +1,7 @@
+theme = "goa"
+paginate = 8
+canonifyURLs = true
+
+[params]
+  author = "Daniel Rontome"
+  description = "Static website for Inception bonus"
