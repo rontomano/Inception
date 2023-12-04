@@ -33,8 +33,8 @@ RUN apk update && apk add curl \
 						zip
 
 #install wordpress
-# COPY tools/wordpress.zip /wordpress.zip
-RUN curl https://es.wordpress.org/wordpress-6.3.2-es_ES.zip -O wordpress.zip
+COPY tools/wordpress.zip /wordpress.zip
+# RUN curl https://es.wordpress.org/wordpress-6.3.2-es_ES.zip -O wordpress.zip
 RUN	unzip wordpress.zip -d /var/www/ \
 	&& rm wordpress.zip \
 	&& chown -R root:root /var/www/wordpress
