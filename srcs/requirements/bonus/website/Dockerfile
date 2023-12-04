@@ -12,7 +12,7 @@ RUN hugo new site /var/hugo/website \
  	&&     hugo -b https://drontome.42.fr/website
 
 COPY    ./conf/config.toml        /var/hugo/website/config.toml
-COPY    conf/presentation.md    /var/hugo/website/content/posts/presentation.md
+COPY    ./conf/presentation.md    /var/hugo/website/content/posts/presentation.md
 
 
 EXPOSE 3000
