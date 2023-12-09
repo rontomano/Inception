@@ -1,5 +1,7 @@
 FROM alpine:3.18
 
+ARG HOST=localhost
+# ARG HOST=drontome.42.fr
 
 RUN     apk update && apk upgrade && apk add hugo \
             git \
@@ -10,7 +12,7 @@ RUN hugo new site /var/hugo/website \
         &&     cd /var/hugo/website \
         &&     git clone https://github.com/vaga/hugo-theme-m10c /var/hugo/website/themes/m10c \
         &&     hugo new /var/hugo/website/content/posts/presentation.md\
-        &&     hugo -b https://drontome.42.fr/website
+        &&     hugo -b https://${HOST}/website
 
 COPY    ./conf/config.toml        /var/hugo/website/config.toml
 COPY    ./conf/presentation.md    /var/hugo/website/content/posts/presentation.md
@@ -22,7 +24,7 @@ WORKDIR /var/hugo/website
 
 CMD     ["hugo", "server", \
          "--bind=0.0.0.0", \
-         "--baseURL=https://drontome.42.fr/website", \
+         "--baseURL=https://${HOST}/website", \
          "-p", "3000", \
          "--logFile=/dev/stdout", \
         "--appendPort=false"]
