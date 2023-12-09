@@ -17,6 +17,8 @@ COPY    ./conf/presentation.md    /var/hugo/website/content/posts/presentation.m
 
 EXPOSE 3000
 
+WORKDIR /var/hugo/website
+
 CMD     ["hugo", "server", \
          "--bind=0.0.0.0", \
          "--baseURL=https://drontome.42.fr/website", \
