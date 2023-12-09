@@ -43,8 +43,8 @@ RUN	unzip wordpress.zip -d /var/www/ \
 COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
 
 #install wp-cli
-RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp-cli.phar \
-	&& chmod +x /usr/local/bin/wp-cli.phar
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp \
+	&& chmod +x /usr/local/bin/wp
 
 RUN mkdir /run/php
 
