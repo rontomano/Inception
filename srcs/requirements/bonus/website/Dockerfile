@@ -24,7 +24,7 @@ WORKDIR /var/hugo/website
 
 CMD     ["hugo", "server", \
          "--bind=0.0.0.0", \
-         "--baseURL=https://${HOST}/website", \
+         "--baseURL=https://$DOMAIN_NAME/website", \
          "-p", "3000", \
          "--logFile=/dev/stdout", \
         "--appendPort=false"]
