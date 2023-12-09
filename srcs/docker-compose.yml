@@ -36,67 +36,67 @@ services:
     depends_on:
       - wordpress
 
-# Bonus services
-  redis:
-    container_name: redis
-    build: ./requirements/bonus/redis
-    restart: on-failure
-    env_file: .env
-    volumes:
-      - wordpress:/var/www/wordpress
-    networks:
-      - inception
-    depends_on:
-      - wordpress
+# # Bonus services
+#   redis:
+#     container_name: redis
+#     build: ./requirements/bonus/redis
+#     restart: on-failure
+#     env_file: .env
+#     volumes:
+#       - wordpress:/var/www/wordpress
+#     networks:
+#       - inception
+#     depends_on:
+#       - wordpress
 
-  adminer:
-    container_name: adminer
-    build: ./requirements/bonus/adminer
-    restart: on-failure
-    env_file: .env
-    networks:
-      - inception
-    depends_on:
-      - mariadb
+#   adminer:
+#     container_name: adminer
+#     build: ./requirements/bonus/adminer
+#     restart: on-failure
+#     env_file: .env
+#     networks:
+#       - inception
+#     depends_on:
+#       - mariadb
 
-  vsftpd:
-    container_name: vsftpd
-    build: ./requirements/bonus/vsftpd
-    restart: on-failure
-    env_file: .env
-    volumes:
-      - wordpress:/var/www/wordpress
-    ports:
-      - 21:21
-      - 42000-42010:42000-42010
-    networks:
-      - inception
-    depends_on:
-      - wordpress
+#   vsftpd:
+#     container_name: vsftpd
+#     build: ./requirements/bonus/vsftpd
+#     restart: on-failure
+#     env_file: .env
+#     volumes:
+#       - wordpress:/var/www/wordpress
+#     ports:
+#       - 21:21
+#       - 42000-42010:42000-42010
+#     networks:
+#       - inception
+#     depends_on:
+#       - wordpress
 
-  cadvisor:
-    container_name: cadvisor
-    build: ./requirements/bonus/cadvisor
-    restart: on-failure
-    env_file: .env
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    ports:
-      - 8080:8080
-    networks:
-      - inception
-    privileged: true
+#   cadvisor:
+#     container_name: cadvisor
+#     build: ./requirements/bonus/cadvisor
+#     restart: on-failure
+#     env_file: .env
+#     volumes:
+#       - /:/rootfs:ro
+#       - /var/run:/var/run:ro
+#       - /sys:/sys:ro
+#       - /var/lib/docker/:/var/lib/docker:ro
+#     ports:
+#       - 8080:8080
+#     networks:
+#       - inception
+#     privileged: true
 
-  website:
-    container_name: website
-    build: ./requirements/bonus/website
-    restart: on-failure
-    env_file: .env
-    networks:
-      - inception
+#   website:
+#     container_name: website
+#     build: ./requirements/bonus/website
+#     restart: on-failure
+#     env_file: .env
+#     networks:
+#       - inception
 
 volumes:
   mariadb:
