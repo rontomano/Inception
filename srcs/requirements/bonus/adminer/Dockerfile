@@ -1,5 +1,5 @@
 #pull basic image
-FROM alpine:3.17
+FROM alpine:3.18
 #set php version
 ARG PHP_VERSION=81
 #https://dev.to/vikbert/my-checklist-of-php-extensions-used-in-alpine-docker-image-1g3j

@@ -1,5 +1,5 @@
 #pull basic image
-FROM alpine:3.17
+FROM alpine:3.18
 #install nginx and openssl
 RUN apk update && apk add nginx openssl
 #create directory for storing certificate and key

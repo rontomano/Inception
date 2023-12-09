@@ -1,5 +1,5 @@
 #pull basic image
-FROM alpine:3.17
+FROM alpine:3.18
 #install node.js
 RUN apk update && apk upgrade && \
     apk add nodejs npm
