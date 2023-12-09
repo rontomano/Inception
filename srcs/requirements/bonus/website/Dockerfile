@@ -8,7 +8,7 @@ RUN     apk update && apk upgrade && apk add hugo \
 # create new hugo site
 RUN hugo new site /var/hugo/website \
         &&     cd /var/hugo/website \
-        &&     git clone https://github.com/vaga/hugo-theme-m10c themes/m10c \
+        &&     git clone https://github.com/vaga/hugo-theme-m10c /var/hugo/website/themes/m10c \
         &&     hugo new /var/hugo/website/content/posts/presentation.md\
         &&     hugo -b https://drontome.42.fr/website
 
