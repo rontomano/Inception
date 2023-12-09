@@ -6,7 +6,7 @@ all: up
 
 up:
 	@mkdir -p $(MARIA_VOLUME) $(WORDPRESS_VOLUME)
-	@docker compose -f $(CONF_FILE) up -d --build
+	@docker compose -f $(CONF_FILE) up  -d --build
 
 down:
 	@docker compose -f $(CONF_FILE) down
