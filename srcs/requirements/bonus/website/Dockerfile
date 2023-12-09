@@ -22,9 +22,9 @@ EXPOSE 3000
 
 WORKDIR /var/hugo/website
 
-CMD     ["hugo", "server", \
-         "--bind=0.0.0.0", \
-         "--baseURL=https://$DOMAIN_NAME/website", \
-         "-p", "3000", \
-         "--logFile=/dev/stdout", \
-        "--appendPort=false"]
+CMD     hugo server \
+         --bind=0.0.0.0 \
+         --baseURL=https://$DOMAIN_NAME/website \
+         -p3000 \
+         --logFile=/dev/stdout \
+        --appendPort=false
