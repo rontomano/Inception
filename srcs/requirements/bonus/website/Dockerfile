@@ -1,15 +1,16 @@
 FROM alpine:3.18
 
+
 RUN     apk update && apk upgrade && apk add hugo \
             git \
             shadow
 
 # create new hugo site
 RUN hugo new site /var/hugo/website \
- 	&&     cd /var/hugo/website \
- 	&&     git clone https://github.com/kaapiandcode/hugo-goa.git themes/goa \
- 	&&     hugo new posts/presentation.md \
- 	&&     hugo -b https://drontome.42.fr/website
+        &&     cd /var/hugo/website \
+        &&     git clone https://github.com/vaga/hugo-theme-m10c themes/m10c \
+        &&     hugo new /var/hugo/website/content/posts/presentation.md\
+        &&     hugo -b https://drontome.42.fr/website
 
 COPY    ./conf/config.toml        /var/hugo/website/config.toml
 COPY    ./conf/presentation.md    /var/hugo/website/content/posts/presentation.md
