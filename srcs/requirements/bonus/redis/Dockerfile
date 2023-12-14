@@ -1,5 +1,5 @@
 #pull basic image
-FROM alpine:3.17
+FROM alpine:3.18
 #install redis
 RUN apk update && apk add redis
 #change .conf to avoid bind localhost, set maxmemory to 20mb and its policy to LRU (Keeps most recently used keys; removes least recently used)

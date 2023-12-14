@@ -18,7 +18,7 @@ wp-cli.phar config create	--allow-root \
 wp-cli.phar core install		\
 	--allow-root    \
 	--path='/var/www/wordpress' \
-	--url=${WP_SITE_URL}        \
+	--url=${DOMAIN_NAME}        \
 	--title=${WP_SITE_TITLE}    \
 	--admin_user=${WP_ADMIN_USER}     \
 	--admin_password=${WP_ADMIN_PASS} \
